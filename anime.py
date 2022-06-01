@@ -53,3 +53,18 @@ ep_sorted = sorted(ep.items(), key=lambda x: x[0])
 print(ep_sorted)
 cx.bar(dict(ep_sorted).keys(), dict(ep_sorted).values())
 mpl.show()
+
+print("Топ 3 источника")
+teasss = data.groupby(['source']).size()
+teasss.sort_values().iloc[-3:]
+
+src1 = data.groupby(['source']).size().sort_values()
+src1.head()
+segse=src.to_list()
+ax = mpl.bar(src.index, segse)
+
+ratings = data.groupby(['production'])['rating'].mean().sort_values().dropna()
+ax = mpl.bar(ratings.index, ratings)
+
+ratings = data.rating.dropna().apply(int).value_counts().sort_index().rename(lambda t: f'[{t}; {t+1})')
+ax = mpl.bar(ratings.index, ratings)
