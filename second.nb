@@ -1,0 +1,44 @@
+sol = DSolve[x'[t] == x[t], x[t], t]
+(D[x[t], t] == x[t]) /. sol〚1〛
+First[sol] (*первый элемент из списка*)
+sol〚1〛
+x[t] /.First[DSolve[{x'[t] == x[t], x[0] == 2}, x[t], t]]
+{x[t], y[t]} /.First[DSolve[{x'[t] == 2 y[t] - x[t], y'[t] == -x[t] + y[t]}, {x[t], y[t]}, t]]
+sol1a =DSolvex''[t] == -ω2 x[t], x[t], t]
+sol1 = DSolve[x''[t] == -ω2 x[t], x, t]
+x[s] /. sol1〚1〛
+{x[τ], x'[τ]} /. sol1〚1〛
+{x[1.5 / ω], x'[1.5 / ω]} /. sol1〚1〛
+sol2 = DSolve[x''[t] == -ω2 x[t], x[t], t]
+x[t] /. sol2〚1〛
+x[1.5 / ω] /. sol2〚1〛
+
+
+eq=x''[t]+\[Omega]^2*x[t]+\[CurlyEpsilon]*b*x[t]^3
+
+x[t_]=x0[t]+\[CurlyEpsilon]*x1[t]
+eq
+
+Expand[eq]
+
+Collect[Expand[eq],\[CurlyEpsilon]]
+
+eq0 = Coefficient[Expand[eq],\[CurlyEpsilon],0]
+
+eq1=Coefficient[Expand[eq],\[CurlyEpsilon],1]
+
+s0=DSolve[{eq0==0,x0[0]==a,x0'[0]==0},x0,t]
+
+eq1/.s0[[1]]
+
+s1=DSolve[{(eq1/.s0[[1]])==0,x1[0]==0,x1'[0]==0},x1,t]
+
+x[t]/.s0[[1]]/.s1[[1]]
+xa[t_] = x[t]/.s0[[1]]/.s1[[1]]
+a=b=\[Omega]=1
+Plot[Evaluate[x*a[t]/.\[CurlyEpsilon]->0],{t,0,6\[Pi]}]
+
+NDSolve[{X''[t]+\[Omega]^2*X[t]+0.1*X[t]^3==0,X[0]==a,X'[0]==b},X,{t,0,6 \[Pi]}]
+Plot[{X[t]/.nds[[1]],xa[[1]],xa[t]/.\[Epsilon] ->0.1},{t,0,6\[Pi]}]
+
+q0 = x''[t]+\[Omega]^2x[t]-\[Epsilon]bx'[t]^2x[t]
