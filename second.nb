@@ -1,6 +1,6 @@
 sol = DSolve[x'[t] == x[t], x[t], t]
 (D[x[t], t] == x[t]) /. sol〚1〛
-First[sol] (*первый элемент из списка*)
+First[sol] 
 sol〚1〛
 x[t] /.First[DSolve[{x'[t] == x[t], x[0] == 2}, x[t], t]]
 {x[t], y[t]} /.First[DSolve[{x'[t] == 2 y[t] - x[t], y'[t] == -x[t] + y[t]}, {x[t], y[t]}, t]]
