@@ -1,0 +1,28 @@
+sol = DSolve[{y'[z]+y[z]*Tan[z]==Sin[2z],y[0]==2}, y[z], z]
+Plot[y[z]/.sol[[1]],{z,-6,6}]
+
+sol = DSolve[{a*y''[z]+b*y'[z]+c*y[z]==0,y[0]==0 ,y'[0]==1}, y[z], z]
+Manipulate[Plot[First[DSolve[{a*y''[z]+b*y'[z]+c*y[z]==0,y[0]==0 ,y'[0]==1}, y[z], z]],{z,-6,6}], {a, 0, 10}, {b, 0, 10}]
+
+ndsol1 =NDSolve[{\[Theta]''[t]\[Equal] -Sin[\[Theta][t]],\[Theta][0]\[Equal]FractionBox[RowBox[{"3", "\:03c0"}], "4"],\[Theta]'[0]\[Equal]0}, \[Theta], {t,0,10}]
+\[Theta][t]/.ndsol1\[LeftDoubleBracket]1〛
+
+eq=x''[t]+\[Omega]^2*x[t]+\[CurlyEpsilon]*b*x[t]^3
+x[t_]=x0[t]+\[CurlyEpsilon] * x1[t]
+eq
+Expand[eq]
+Collect[Expand[eq],\[CurlyEpsilon]]
+Coefficient[y^2+3y+Sin[z]y,y,2]
+eq0=Coefficient[Expand[eq],\[CurlyEpsilon],0]
+eq1 = Coefficient[Expand[eq],\[CurlyEpsilon],1]
+s0=DSolve[{eq0==0 ,x0[0]==a, x0'[0]==0},x0,t]
+eq1/.s0[[1]]
+s1=DSolve[{eq1/.s0[1]==0,x1[0]==0,x1'[0]==0},x1,t]
+x[t]
+x[t]/.s0[1]/.s1[1]
+xa[t_]=x[t]/.s0[1]/.s1[1]
+a=b=\[Omega]=1;
+Plot[Evaluate[xa[t]/.\[CurlyEpsilon]->{0,0.1,0.5,0.9}],{t,0,6\[Pi]}]
+
+NDSolve[{t*X'[t]=X[t]+\[Epsilon]*y[t],t*y'[t]=(2-x)*y,X[1]==1,y[1]==1/Exp}, X, {t,0,6Pi}]
+Plot[X[t]/.nds[[1]],{t,0,6Pi}]
