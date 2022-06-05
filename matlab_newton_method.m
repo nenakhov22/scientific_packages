@@ -23,7 +23,14 @@ for i = 1:iter
     set(L,'LineStyle',':')
     x1=x2;
     delete(L)
+    if x2 < a | x2 > b 
+        flag = 1
+        break; 
+    end;
     if abs(f(x2))<eps break; end;
 end;
-P=plot(x,f(x1)+yh*(x-x1),':',x1,f(x1),'*',x2,0,'*',x2,f(x2),'o')
+if flag == 0:
+    P=plot(x,f(x1)+yh*(x-x1),':',x1,f(x1),'*',x2,0,'*',x2,f(x2),'o')
+else disp("bad point");
+end;
 hold off
