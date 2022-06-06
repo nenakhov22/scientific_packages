@@ -1,21 +1,14 @@
-import numpy as np
 import pandas as pd
-data = pd.read_csv('titanic.csv')
-print(data.isnull().sum())
-group = pd.DataFrame(data, columns=['SibSp', 'Parch'])
-data['Relatives'] = data[['SibSp','Parch']].sum(axis=1)
-group = pd.DataFrame(data, columns=['SibSp', 'Parch'])
-data['Relatives'] = group.any(axis = 1)
-group = pd.DataFrame(data, columns=['SibSp', 'Parch', 'Relatives'])
-print(group)
-male = data['Sex'].value_counts()
-print(male)
-data.loc[(data['Pclass'] == 1), 'Pclass'] = 'elite'
-data.loc[(data['Pclass'] == 2), 'Pclass'] = 'middle'
-data.loc[(data['Pclass'] == 3), 'Pclass'] = 'redneck'
-print(data['Pclass'])
-data['Fare_bin'] = data['Fare']
-data.loc[(data['Fare'] < 20), 'Fare_bin'] = 'Дешево'
-data.loc[(data['Fare'] >= 20), 'Fare_bin'] = 'Дорого'
-print(data['Fare_bin'])
-print(data['Fare_bin'].value_counts())
+import numpy as np
+data = pd.read_csv("titanic.csv")
+print(data)
+data_1 = pd.pivot_table(data[["Sex", "Survived"]], index = ["Sex"], columns = ["Survived"], aggfunc = len)
+#print(data['Fare'].agg(['max','mean','std']))
+data['Pclass'] = data['Pclass'].replace(to_replace=[1, 2, 3], value=['элита', 'средний класс', 'рабочий класс'])
+
+data['Expensive'] = [0 for i in range(data.shape[0])]
+#print(data.columns)
+data.loc[data.Fare > 40,'Expensive'] = data.loc[data.Fare > 40,'Expensive'].replace(to_replace=0, value=1)
+print(data)
+data_2=pd.pivot_table(data[["Expensive", "Survived"]],index = ["Expensive"],columns = ["Survived"],aggfunc = len)
+print(data_2)
