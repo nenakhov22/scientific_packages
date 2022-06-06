@@ -36,7 +36,7 @@ print(data.describe(percentiles = perc, include = ['float64','int32']))
 
 
 print(data.info())
-# data=data.fillna({'episodes':0,	'airdate':'',	'rating' :0,	'voters':0})
+
 
 
 genresList = data['genre'].str.split(',')
