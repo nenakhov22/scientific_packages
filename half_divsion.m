@@ -14,8 +14,6 @@ axis([a,b,ymin,ymax]);
 z = ginput(2); z1=z(1,1), z2=z(2,1);
 f1 = f(z1); f2=f(z2); z=(z1+z2)/2; y=f(z);
 flag = 0;
-if f1*f2>0 'Плохие точки'
-end;
 for i=1:iter
     z=(z1+z2)/2; y=f(z);
     if y*f1<0
@@ -30,5 +28,7 @@ end;
 if flag == 1
     plot(z1,0,'*',z2,0,'*',z,0,'o');
     disp("Найденный корень " + z);
+else
+    disp("Плохие точки");
 end;
 hold off
