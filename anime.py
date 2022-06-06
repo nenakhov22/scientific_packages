@@ -65,13 +65,6 @@ plt.xticks(rotation=90)
 plt.xticks(fontsize=4)
 fig1.suptitle("зависимость между названием компаний и количеством выпущенных этой компанией аниме")
 
-listGeneres = sum(genresList, [])
-print(list(listGeneres))
-fig2, ax2 = plt.subplots()
-fig2.set_figwidth(22)
-fig2.set_figheight(6)
-ax2.bar(list(sorted(set(listGeneres))), [listGeneres.count(x) for x in sorted(set(listGeneres))], width=0.4)
-plt.xticks(fontsize=6.5)
 
 
 #8.b
