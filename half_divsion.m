@@ -13,20 +13,22 @@ if ymax>0 ymax=1.1*ymax; else ymax=0.9*ymax; end;
 axis([a,b,ymin,ymax]);
 z = ginput(2); z1=z(1,1), z2=z(2,1);
 f1 = f(z1); f2=f(z2); z=(z1+z2)/2; y=f(z);
-P = plot(z1,0,'*',z2,0,'*',z,0,'o');
+flag = 0;
 if f1*f2>0 'Плохие точки'
 end;
 for i=1:iter
     z=(z1+z2)/2; y=f(z);
-    delete(P);
-    P=plot(z1,0,'*',z2,0,'*',z,0,'o');
     if y*f1<0
         z2=z;
     else z1=z;
     end;
     if abs(f(z))<eps
+        flag = 1;
         break;
     end;
 end;
-disp("Найденный корень " + z);
+if flag == 1
+    plot(z1,0,'*',z2,0,'*',z,0,'o');
+    disp("Найденный корень " + z);
+end;
 hold off
